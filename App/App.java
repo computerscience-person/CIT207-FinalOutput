@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.List;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,7 +29,9 @@ public class App {
     var bingoBoard = new JPanel(new GridLayout(1, 5));
     var dims = new Dimension(550, 650);
 
-    String[] sampleButtonLabels = { "1", "3", "7", "9", "15" };
+    // String[] sampleButtonLabels = { "1", "3", "7", "9", "15" };
+    int[] bButtonNums = NumberGen.getRandomNumberInRange(1, 15, 5);
+    String[] bButtons = Arrays.stream(bButtonNums).mapToObj(String::valueOf).toArray(String[]::new);
 
     appWindow.setSize(dims);
     appWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,11 +45,11 @@ public class App {
 
     appPanel.add(titlePanel);
 
-    bingoBoard.add(buildBingoLane(sampleButtonLabels));
-    bingoBoard.add(buildBingoLane(sampleButtonLabels));
-    bingoBoard.add(buildBingoLane(sampleButtonLabels));
-    bingoBoard.add(buildBingoLane(sampleButtonLabels));
-    bingoBoard.add(buildBingoLane(sampleButtonLabels));
+    bingoBoard.add(buildBingoLane(bButtons));
+    bingoBoard.add(buildBingoLane(bButtons));
+    bingoBoard.add(buildBingoLane(bButtons));
+    bingoBoard.add(buildBingoLane(bButtons));
+    bingoBoard.add(buildBingoLane(bButtons));
 
     appPanel.add(bingoBoard);
 
