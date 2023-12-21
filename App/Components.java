@@ -42,10 +42,5 @@ public class Components {
       size.width = size.height = Math.min(size.width, size.height);
       return size;
     }
-
-    public boolean toggle() {
-      toggleFlag = !toggleFlag;
-      return toggleFlag;
-    }
   }
 }

@@ -53,7 +53,7 @@ public class App {
         new JLabel("O", SwingConstants.CENTER), };
 
     for (var bingoLabel : bingoLabels) {
-      bingoLabel.setFont(new Font("Impact", Font.BOLD, 25));
+      bingoLabel.setFont(new Font("Impact", Font.BOLD, 55));
       titlePanel.add(bingoLabel);
     }
 
@@ -63,6 +63,8 @@ public class App {
     appPanelConstraints.weighty = 1;
     appPanelConstraints.fill = GridBagConstraints.BOTH;
     appPanelConstraints.gridwidth = 5;
+    appPanelConstraints.ipadx = 45;
+    appPanelConstraints.ipady = 35;
 
     appPanel.add(titlePanel, appPanelConstraints);
 
@@ -86,24 +88,24 @@ public class App {
     appWindow.setVisible(true);
   }
 
-  static JPanel buildBingoLane(String[] buttonLabels) {
-    var bingoLane = new JPanel(new GridLayout(5, 1));
-    var components = new Components();
-
-    for (String label : buttonLabels) {
-      var bingoButton = components.new BingoNumber(label);
-      bingoButton.setPreferredSize(new Dimension(75, 75));
-      bingoButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          System.err.println(e.toString());
-        }
-      });
-      bingoLane.add(bingoButton);
-    }
-
-    return bingoLane;
-  }
+  // static JPanel buildBingoLane(String[] buttonLabels) {
+  // var bingoLane = new JPanel(new GridLayout(5, 1));
+  // var components = new Components();
+  //
+  // for (String label : buttonLabels) {
+  // var bingoButton = components.new BingoNumber(label);
+  // bingoButton.setPreferredSize(new Dimension(75, 75));
+  // bingoButton.addActionListener(new ActionListener() {
+  // @Override
+  // public void actionPerformed(ActionEvent e) {
+  // System.err.println(e.toString());
+  // }
+  // });
+  // bingoLane.add(bingoButton);
+  // }
+  //
+  // return bingoLane;
+  // }
 
   static JPanel buildBingoLane(String[] buttonLabels, Color buttonColor) {
     var bingoLane = new JPanel(new GridLayout(5, 1));
@@ -111,17 +113,12 @@ public class App {
 
     for (String label : buttonLabels) {
       var bingoButton = components.new BingoNumber(label, buttonColor);
-      bingoButton.setPreferredSize(new Dimension(75, 75));
+      bingoButton.setFont(new Font("Arial", Font.PLAIN, 20));
+      bingoButton.setPreferredSize(new Dimension(85, 85));
       bingoButton.addActionListener(e -> {
         Components.BingoNumber eventButton = (Components.BingoNumber) e.getSource();
-        System.err.println(eventButton.toString());
-        var toggle = bingoButton.toggle();
-        System.err.println(toggle);
-        if (toggle) {
-          eventButton.setBackground(Color.LIGHT_GRAY);
-        } else {
-          eventButton.setBackground(buttonColor);
-        }
+        eventButton.setBackground(Color.LIGHT_GRAY);
+        System.out.println(eventButton.toString());
       });
       bingoLane.add(bingoButton);
     }
