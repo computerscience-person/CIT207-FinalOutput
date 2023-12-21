@@ -6,11 +6,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
@@ -32,6 +27,7 @@ public class App {
     var appWindow = new JFrame("BINGO Game!");
     var appPanel = new JPanel(new GridBagLayout());
     var appPanelConstraints = new GridBagConstraints();
+    var titlePanel = new JPanel(new GridLayout(1, 5));
     var bingoBoard = new JPanel(new GridLayout(1, 5));
 
     String[] bButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(1, 15, 5));
@@ -41,7 +37,6 @@ public class App {
     String[] gButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(46, 60, 5));
     String[] oButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(61, 75, 5));
 
-    var titlePanel = new JPanel(new GridLayout(1, 5));
     JLabel[] bingoLabels = { new JLabel("B", SwingConstants.CENTER), new JLabel("I", SwingConstants.CENTER),
         new JLabel("N", SwingConstants.CENTER), new JLabel("G", SwingConstants.CENTER),
         new JLabel("O", SwingConstants.CENTER), };
@@ -59,15 +54,15 @@ public class App {
     appPanelConstraints.weighty = 1;
     appPanelConstraints.fill = GridBagConstraints.BOTH;
     appPanelConstraints.gridwidth = 5;
-    appPanelConstraints.ipadx = 45;
-    appPanelConstraints.ipady = 35;
+    appPanelConstraints.ipadx = 75;
+    appPanelConstraints.ipady = 75;
 
     appPanel.add(titlePanel, appPanelConstraints);
 
-    bingoBoard.add(buildBingoLane(bButtons, Color.CYAN));
-    bingoBoard.add(buildBingoLane(iButtons, Color.BLUE));
-    bingoBoard.add(buildBingoLane(nButtons, Color.RED));
-    bingoBoard.add(buildBingoLane(gButtons, Color.YELLOW));
+    bingoBoard.add(buildBingoLane(bButtons, Color.decode("#5CFFFF")));
+    bingoBoard.add(buildBingoLane(iButtons, Color.decode("#9999FF")));
+    bingoBoard.add(buildBingoLane(nButtons, Color.decode("#FF7070")));
+    bingoBoard.add(buildBingoLane(gButtons, Color.decode("#FFFF5C")));
     bingoBoard.add(buildBingoLane(oButtons, Color.decode("#00FA9A")));
 
     appPanelConstraints.gridx = 0;
@@ -83,25 +78,6 @@ public class App {
     appWindow.setVisible(true);
   }
 
-  // static JPanel buildBingoLane(String[] buttonLabels) {
-  // var bingoLane = new JPanel(new GridLayout(5, 1));
-  // var components = new Components();
-  //
-  // for (String label : buttonLabels) {
-  // var bingoButton = components.new BingoNumber(label);
-  // bingoButton.setPreferredSize(new Dimension(75, 75));
-  // bingoButton.addActionListener(new ActionListener() {
-  // @Override
-  // public void actionPerformed(ActionEvent e) {
-  // System.err.println(e.toString());
-  // }
-  // });
-  // bingoLane.add(bingoButton);
-  // }
-  //
-  // return bingoLane;
-  // }
-
   static JPanel buildBingoLane(String[] buttonLabels, Color buttonColor) {
     var bingoLane = new JPanel(new GridLayout(5, 1));
     var components = new Components();
@@ -112,8 +88,12 @@ public class App {
       bingoButton.setPreferredSize(new Dimension(85, 85));
       bingoButton.addActionListener(e -> {
         Components.BingoNumber eventButton = (Components.BingoNumber) e.getSource();
-        eventButton.setBackground(Color.LIGHT_GRAY);
-        System.out.println(eventButton.toString());
+        boolean toggled = eventButton.isSelected();
+        if (toggled) {
+          bingoButton.recolor(Color.LIGHT_GRAY);
+        } else {
+          bingoButton.recolor(buttonColor);
+        }
       });
       bingoLane.add(bingoButton);
     }
