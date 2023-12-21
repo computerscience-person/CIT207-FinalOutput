@@ -30,8 +30,11 @@ public class App {
     var dims = new Dimension(550, 650);
 
     // String[] sampleButtonLabels = { "1", "3", "7", "9", "15" };
-    int[] bButtonNums = NumberGen.getRandomNumberInRange(1, 15, 5);
-    String[] bButtons = Arrays.stream(bButtonNums).mapToObj(String::valueOf).toArray(String[]::new);
+    String[] bButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(1, 15, 5));
+    String[] iButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(16, 30, 5));
+    String[] nButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(31, 45, 5));
+    String[] gButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(46, 60, 5));
+    String[] oButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(61, 75, 5));
 
     appWindow.setSize(dims);
     appWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -46,10 +49,10 @@ public class App {
     appPanel.add(titlePanel);
 
     bingoBoard.add(buildBingoLane(bButtons));
-    bingoBoard.add(buildBingoLane(bButtons));
-    bingoBoard.add(buildBingoLane(bButtons));
-    bingoBoard.add(buildBingoLane(bButtons));
-    bingoBoard.add(buildBingoLane(bButtons));
+    bingoBoard.add(buildBingoLane(iButtons));
+    bingoBoard.add(buildBingoLane(nButtons));
+    bingoBoard.add(buildBingoLane(gButtons));
+    bingoBoard.add(buildBingoLane(oButtons));
 
     appPanel.add(bingoBoard);
 
@@ -68,5 +71,9 @@ public class App {
     }
 
     return bingoLane;
+  }
+
+  static String[] intArrToStringArr(int[] intArr) {
+    return Arrays.stream(intArr).mapToObj(String::valueOf).toArray(String[]::new);
   }
 }
