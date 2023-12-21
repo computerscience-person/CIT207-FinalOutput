@@ -33,9 +33,7 @@ public class App {
     var appPanel = new JPanel(new GridBagLayout());
     var appPanelConstraints = new GridBagConstraints();
     var bingoBoard = new JPanel(new GridLayout(1, 5));
-    // var dims = new Dimension(550, 650);
 
-    // String[] sampleButtonLabels = { "1", "3", "7", "9", "15" };
     String[] bButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(1, 15, 5));
     String[] iButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(16, 30, 5));
     String[] nButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(31, 45, 5));
@@ -43,14 +41,12 @@ public class App {
     String[] gButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(46, 60, 5));
     String[] oButtons = intArrToStringArr(NumberGen.getRandomNumberInRange(61, 75, 5));
 
-    // appWindow.setSize(dims);
-    // appPanel.setSize(dims);
-    appWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
     var titlePanel = new JPanel(new GridLayout(1, 5));
     JLabel[] bingoLabels = { new JLabel("B", SwingConstants.CENTER), new JLabel("I", SwingConstants.CENTER),
         new JLabel("N", SwingConstants.CENTER), new JLabel("G", SwingConstants.CENTER),
         new JLabel("O", SwingConstants.CENTER), };
+
+    appWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     for (var bingoLabel : bingoLabels) {
       bingoLabel.setFont(new Font("Impact", Font.BOLD, 55));
@@ -84,7 +80,6 @@ public class App {
     appWindow.add(appPanel);
 
     appWindow.pack();
-    // appWindow.setSize(dims);
     appWindow.setVisible(true);
   }
 
