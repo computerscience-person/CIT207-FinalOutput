@@ -44,18 +44,18 @@ public class App {
     appWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     for (var bingoLabel : bingoLabels) {
-      bingoLabel.setFont(new Font("Impact", Font.BOLD, 55));
+      bingoLabel.setFont(new Font("Impact", Font.BOLD, 125));
       titlePanel.add(bingoLabel);
     }
 
     appPanelConstraints.gridx = 0;
     appPanelConstraints.gridy = 0;
     appPanelConstraints.weightx = 1;
-    appPanelConstraints.weighty = 1;
+    appPanelConstraints.weighty = 0;
     appPanelConstraints.fill = GridBagConstraints.BOTH;
     appPanelConstraints.gridwidth = 5;
     appPanelConstraints.ipadx = 75;
-    appPanelConstraints.ipady = 75;
+    appPanelConstraints.ipady = 40;
 
     appPanel.add(titlePanel, appPanelConstraints);
 
@@ -84,7 +84,11 @@ public class App {
 
     for (String label : buttonLabels) {
       var bingoButton = components.new BingoNumber(label, buttonColor);
-      bingoButton.setFont(new Font("Arial", Font.PLAIN, 20));
+      if (isInt(label)) {
+        bingoButton.setFont(new Font("Arial", Font.PLAIN, 60));
+      } else {
+        bingoButton.setFont(new Font("Arial", Font.PLAIN, 20));
+      }
       bingoButton.setPreferredSize(new Dimension(85, 85));
       bingoButton.addActionListener(e -> {
         Components.BingoNumber eventButton = (Components.BingoNumber) e.getSource();
@@ -103,5 +107,14 @@ public class App {
 
   static String[] intArrToStringArr(int[] intArr) {
     return Arrays.stream(intArr).mapToObj(String::valueOf).toArray(String[]::new);
+  }
+
+  static boolean isInt(String s) {
+    try {
+      Integer.parseInt(s);
+    } catch (NumberFormatException e) {
+      return false;
+    }
+    return true;
   }
 }
